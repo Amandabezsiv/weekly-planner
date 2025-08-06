@@ -50,47 +50,50 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave, weekDays 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">Editar Tarefa</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 text-xl">
+      <div className="bg-white rounded-3xl p-8 w-full max-w-md mx-4 shadow-2xl" style={{borderColor: '#F5CBCB', border: '1px solid'}}>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold" style={{color: '#748DAE'}}>Editar Tarefa</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-pink-500 text-2xl transition-colors duration-200 hover:scale-110 transform">
             ×
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Título */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Título *</label>
+            <label className="block text-sm font-semibold mb-2" style={{color: '#748DAE'}}>Título *</label>
             <input
               type="text"
               value={formData.title}
               onChange={e => handleChange('title', e.target.value)}
               placeholder="Ex: Reunião de equipe"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 bg-white transition-all duration-200"
+              style={{borderColor: '#F5CBCB', border: '2px solid'}}
               autoFocus
             />
           </div>
 
           {/* Descrição */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+            <label className="block text-sm font-semibold mb-2" style={{color: '#748DAE'}}>Descrição</label>
             <textarea
               value={formData.description}
               onChange={e => handleChange('description', e.target.value)}
               placeholder="Adicione uma descrição opcional..."
               rows={3}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className="w-full rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 bg-white transition-all duration-200 resize-none"
+              style={{borderColor: '#F5CBCB', border: '2px solid'}}
             />
           </div>
 
           {/* Dia */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Dia *</label>
+            <label className="block text-sm font-semibold mb-2" style={{color: '#748DAE'}}>Dia *</label>
             <select
               value={formData.day}
               onChange={e => handleChange('day', e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 bg-white transition-all duration-200"
+              style={{borderColor: '#F5CBCB', border: '2px solid'}}
             >
               <option value="">Selecione um dia</option>
               {weekDays.map(day => (
@@ -104,11 +107,12 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave, weekDays 
           {/* Horário e Duração */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Hora de Início</label>
+              <label className="block text-sm font-semibold mb-2" style={{color: '#748DAE'}}>Hora de Início</label>
               <select
                 value={formData.startHour}
                 onChange={e => handleChange('startHour', parseInt(e.target.value))}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 bg-white transition-all duration-200"
+                style={{borderColor: '#F5CBCB', border: '2px solid'}}
               >
                 {Array.from({ length: 24 }, (_, i) => (
                   <option key={i} value={i}>
@@ -119,13 +123,14 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave, weekDays 
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-semibold mb-2" style={{color: '#748DAE'}}>
                 Duração (horas)
               </label>
               <select
                 value={formData.duration}
                 onChange={e => handleChange('duration', parseInt(e.target.value))}
-                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 bg-white transition-all duration-200"
+                style={{borderColor: '#F5CBCB', border: '2px solid'}}
               >
                 {Array.from({ length: 8 }, (_, i) => i + 1).map(duration => (
                   <option key={duration} value={duration}>
@@ -138,8 +143,8 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave, weekDays 
 
           {/* Horário de término (calculado) */}
           {formData.startHour !== '' && formData.duration && (
-            <div className="bg-gray-50 p-3 rounded-md">
-              <p className="text-sm text-gray-600">
+            <div className="p-4 rounded-2xl" style={{backgroundColor: '#FFEAEA', borderColor: '#F5CBCB', border: '1px solid'}}>
+              <p className="text-sm font-medium" style={{color: '#748DAE'}}>
                 <strong>Horário:</strong> {String(formData.startHour).padStart(2, '0')}:00 -{' '}
                 {String(formData.startHour + formData.duration).padStart(2, '0')}:00
               </p>
@@ -147,17 +152,23 @@ export default function EditTaskModal({ task, isOpen, onClose, onSave, weekDays 
           )}
 
           {/* Botões */}
-          <div className="flex gap-3 pt-4">
+          <div className="flex gap-4 pt-6">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
+              className="flex-1 text-white py-3 px-6 rounded-2xl transition-all duration-200 font-medium transform hover:scale-105"
+              style={{backgroundColor: '#9ECAD6'}}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#8bb8c4'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#9ECAD6'}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
+              className="flex-1 text-white py-3 px-6 rounded-2xl transition-all duration-200 font-medium transform hover:scale-105 shadow-lg"
+              style={{backgroundColor: '#748DAE'}}
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#6a7ba8'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#748DAE'}
             >
               Salvar Alterações
             </button>
